@@ -37,4 +37,18 @@ export default {
     padding-right: 15px;
   }
 }
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .1s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-80px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(80px);
+}
 </style>

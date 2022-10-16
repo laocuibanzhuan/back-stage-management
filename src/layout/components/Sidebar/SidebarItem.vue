@@ -26,7 +26,6 @@
 
 <script>
 import path from 'path'
-import { isExternal } from '@/utils/validate'
 import Item from './Item'
 import AppLink from './Link'
 import FixiOSBug from './FixiOSBug'
@@ -82,10 +81,10 @@ export default {
       return false
     },
     resolvePath(routePath) {
-      if (isExternal(routePath)) {
+      if (/^(https?:|mailto:|tel:)/.test(routePath)) {
         return routePath
       }
-      if (isExternal(this.basePath)) {
+      if (/^(https?:|mailto:|tel:)/.test(this.basePath)) {
         return this.basePath
       }
       return path.resolve(this.basePath, routePath)

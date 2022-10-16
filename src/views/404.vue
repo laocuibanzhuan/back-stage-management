@@ -8,13 +8,10 @@
         <img class="pic-404__child right" src="@/assets/404_images/404_cloud.png" alt="404">
       </div>
       <div class="bullshit">
-        <div class="bullshit__oops">OOPS!</div>
-        <div class="bullshit__info">All rights reserved
-          <a style="color:#20a0ff" href="https://wallstreetcn.com" target="_blank">wallstreetcn</a>
-        </div>
-        <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">Please check that the URL you entered is correct, or click the button below to return to the homepage.</div>
-        <a href="" class="bullshit__return-home">Back to home</a>
+        <div class="bullshit__oops">出错了！</div>
+        <div class="bullshit__headline">这个页面你好像不能进入......</div>
+        <div class="bullshit__info">请检查您输入的网址是否正确，请点击以下按钮重新登录或者向管理员发送错误报告</div>
+        <router-link class="bullshit__return-home" to="/login">重新登录</router-link>
       </div>
     </div>
   </div>
@@ -23,12 +20,7 @@
 <script>
 
 export default {
-  name: 'Page404',
-  computed: {
-    message() {
-      return 'The webmaster said that you can not enter this page...'
-    }
-  }
+  name: 'Page404'
 }
 </script>
 
@@ -60,10 +52,10 @@ export default {
         left: 220px;
         opacity: 0;
         animation-name: cloudLeft;
-        animation-duration: 2s;
+        animation-duration: 3s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
-        animation-delay: 1s;
+        animation-delay: 0.5s;
       }
       &.mid {
         width: 46px;
@@ -71,10 +63,10 @@ export default {
         left: 420px;
         opacity: 0;
         animation-name: cloudMid;
-        animation-duration: 2s;
+        animation-duration: 3s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
-        animation-delay: 1.2s;
+        animation-delay: 0.4s;
       }
       &.right {
         width: 62px;
@@ -82,10 +74,10 @@ export default {
         left: 500px;
         opacity: 0;
         animation-name: cloudRight;
-        animation-duration: 2s;
+        animation-duration: 3s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
-        animation-delay: 1s;
+        animation-delay: 0.5s;
       }
       @keyframes cloudLeft {
         0% {
@@ -210,7 +202,7 @@ export default {
       cursor: pointer;
       animation-name: slideUp;
       animation-duration: 0.5s;
-      animation-delay: 0.3s;
+      animation-delay: 0.5s;
       animation-fill-mode: forwards;
     }
     @keyframes slideUp {

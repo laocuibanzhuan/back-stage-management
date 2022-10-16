@@ -23,6 +23,7 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
+import user from '@/store/user'
 
 export default {
   components: { SidebarItem, Logo },
@@ -31,12 +32,11 @@ export default {
       'sidebar'
     ]),
     routes() {
-      return this.$router.options.routes
+      return user.state.finallyRoutes || this.$router.options.routes
     },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
-      // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
         return meta.activeMenu
       }
