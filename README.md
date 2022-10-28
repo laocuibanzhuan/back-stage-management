@@ -107,7 +107,7 @@ http://gmall-h5-api.atguigu.cn/admin/product/fileUpload
 
 父组件mounted之后很短时间内el-tabs解析就会完成，从而显示图表，不影响总体
 
-**解决方式：**改变布局，将图标放在el-tabs外
+**解决方式：**改变布局，将图表放在el-tabs外
 
 # 关于注释
 
