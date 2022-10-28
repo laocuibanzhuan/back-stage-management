@@ -1,5 +1,6 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/token'
+import { getRoutes, setRoutes, removeRoutes } from '@/utils/routes'
 import { resetRouter, asyncRoutes, constantRoutes } from '@/router'
 import router from '@/router'
 
@@ -27,7 +28,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: undefined,
     avatar: undefined,
-    routes: undefined,
+    routes: getRoutes(),
     roles: undefined,
     buttons: undefined,
     viableRoutes: undefined,
@@ -66,6 +67,7 @@ const actions = {
     const res = await getInfo(state.token)
     if (res.code == 20000) {
       commit('SET_OTHER', res.data)
+      setRoutes(state.routes)
       COMPUTE_VIABLE_ROUTES()
       mergeRoutes()
       return true
@@ -78,19 +80,12 @@ const actions = {
     const res = await logout(state.token)
     if (res.code == 20000) {
       removeToken()
+      removeRoutes()
       resetRouter()
       commit('RESET_STATE')
     } else {
       return Promise.reject(new Error('失败，请重新尝试'))
     }
-  },
-
-  resetToken({ commit }) {
-    return new Promise(resolve => {
-      removeToken()
-      commit('RESET_STATE')
-      resolve()
-    })
   }
 }
 

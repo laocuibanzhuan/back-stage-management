@@ -6,6 +6,9 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 
+import { getRoutes } from '@/utils/routes'
+
+
 export const constantRoutes = [
   {
     path: '/login',
@@ -123,9 +126,9 @@ export const asyncRoutes = [
 ];
 
 
-const createRouter = () => new Router({
+const createRouter = (finallyRoutes = constantRoutes) => new Router({
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
+  routes: finallyRoutes
 })
 
 
@@ -135,5 +138,29 @@ export function resetRouter() {
 }
 
 
-const router = createRouter()
+const COMPUTE_VIABLE_ROUTES = function (asyncRoutes_ = asyncRoutes) {
+  viableRoutes = asyncRoutes_.filter(item => {
+    if (routes.indexOf(item.name) != -1) {
+      if (item.children && item.children.length) {
+        COMPUTE_VIABLE_ROUTES(item.children)
+      }
+      return true
+    } else {
+      return false
+    }
+  })
+}
+
+
+let router
+let viableRoutes
+let routes = getRoutes()
+if (sessionStorage.getItem('token')) {
+  COMPUTE_VIABLE_ROUTES()
+  router = createRouter(constantRoutes.concat(viableRoutes))
+} else {
+  router = createRouter()
+}
+
+
 export default router
